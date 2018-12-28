@@ -11,9 +11,6 @@ branches:
     - master
     - /^v.*$/
 
-before_install:
-  - pip install --upgrade pip
-
 before_script:
   - docker pull "$IMAGE" || true
 
