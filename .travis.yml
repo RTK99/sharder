@@ -25,10 +25,9 @@ before_deploy:
   - pip install --user --upgrade awscli
   - export PATH=$PATH:/$HOME/.local/bin
   - eval $(aws ecr get-login --region ${REGION})
-  - docker tag "$image" "${image}:latest"
-  - docker tag "$image" "${image}:${TRAVIS_TAG}"
-  - docker push ${ECR_URL}/${image}:${TRAVIS_TAG}
 
   deploy:
+    provider: script
+    script: docker tag "$image" "${image}:latest" && docker tag "$image" "${image}:${TRAVIS_TAG}" && docker push ${ECR_URL}/${image}:${TRAVIS_TAG}
     on:
       tags: true
