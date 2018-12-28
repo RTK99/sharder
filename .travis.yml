@@ -24,7 +24,7 @@ before_deploy:
   - pip install --user --upgrade awscli
   - pip install --user urllib3[secure]
   - export PATH=$PATH:/$HOME/.local/bin
-  - eval $(aws ecr get-login --region ${REGION})
+  - eval $(aws ecr get-login --region ${REGION} --no-include-email)
 
 deploy:
   provider: script
