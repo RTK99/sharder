@@ -22,6 +22,7 @@ script:
 before_deploy:
   - docker --version
   - pip install --user --upgrade awscli
+  - pip install --user urllib3[secure]
   - export PATH=$PATH:/$HOME/.local/bin
   - eval $(aws ecr get-login --region ${REGION})
 
@@ -30,7 +31,7 @@ deploy:
   script: docker tag "$IMAGE" "${IMAGE}:latest" && docker tag "$IMAGE" "${IMAGE}:${TRAVIS_TAG}" && docker push ${ECR_URL}/${IMAGE}:${TRAVIS_TAG}
   on:
     tags: true
-    
+
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
