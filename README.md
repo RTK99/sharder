@@ -1,4 +1,4 @@
-# sharder-binary
+# sharder-binary [![Build Status](https://travis-ci.org/dabbotorg/sharder.svg?branch=master)](https://travis-ci.org/dabbotorg/sharder)
 
 `sharder-binary` is a 0-downtime* WebSocket proxy interfacing with Discord
 built on the [serenity] library, sending events to a message queue to be
