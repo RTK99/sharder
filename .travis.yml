@@ -4,21 +4,21 @@ services:
   - docker
 env:
   global:
-    - image: dabbot/sharder
+    - IMAGE=dabbot/sharder
 
 branches:
   only:
-  - master
-  - /^v.*$/
+    - master
+    - /^v.*$/
 
 before_install:
   - pip install -U pip
 
 before_script:
-  - docker pull "$image" || true
+  - docker pull "$IMAGE" || true
 
 script:
-  - docker build --pull --cache-from "$image" -t "$image" .
+  - docker build --pull --cache-from "$IMAGE" -t "$IMAGE" .
 
 before_deploy:
   - docker --version
@@ -26,8 +26,8 @@ before_deploy:
   - export PATH=$PATH:/$HOME/.local/bin
   - eval $(aws ecr get-login --region ${REGION})
 
-  deploy:
-    provider: script
-    script: docker tag "$image" "${image}:latest" && docker tag "$image" "${image}:${TRAVIS_TAG}" && docker push ${ECR_URL}/${image}:${TRAVIS_TAG}
-    on:
-      tags: true
+deploy:
+  provider: script
+  script: docker tag "$IMAGE" "${IMAGE}:latest" && docker tag "$IMAGE" "${IMAGE}:${TRAVIS_TAG}" && docker push ${ECR_URL}/${IMAGE}:${TRAVIS_TAG}
+  on:
+    tags: true
