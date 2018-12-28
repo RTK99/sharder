@@ -22,7 +22,7 @@ tungstenite = "0.6"
 
 [dependencies.futures-preview]
 features = ["compat", "tokio-compat"]
-version = "0.3.0-alpha.9"
+version = "0.3.0-alpha.11"
 
 [dependencies.redis-async]
 git = "https://github.com/dabbotorg/redis-async-rs"
